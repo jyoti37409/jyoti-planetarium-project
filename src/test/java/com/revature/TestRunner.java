@@ -35,13 +35,8 @@ public class TestRunner {
 
     // here is where we will create our test resources: make them static for easy access in our steps
     public static WebDriver driver;
-    public static LoginPage loginPage;
-    public static RegistrationPage registrationPage;
-    public static HomePage homePage;
-    public static AddPlanetPage addPlanetPage;
-    public static AddMoonPage addMoonPage;
-    public static DeleteMoonPage deleteMoonPage;
-    public static DeletePlanetPage deletePlanetPage;
+
+    public static PlanetariumPage planetariumPage;
 
 
     @BeforeClass
@@ -50,14 +45,8 @@ public class TestRunner {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         driver.manage().window().maximize();
 
-        loginPage = new LoginPage(driver, "Planetarium Login");
-        registrationPage = new RegistrationPage(driver, "Account Creation");
-        homePage = new HomePage(driver, "Planetarium Home");
+        planetariumPage = new PlanetariumPage(driver,"Planetarium Login");
 
-        addPlanetPage = new AddPlanetPage(driver, "Add Planet");
-        addMoonPage = new AddMoonPage(driver, "Add Moon");
-        deleteMoonPage = new DeleteMoonPage(driver, "Delete Moon");
-        deletePlanetPage = new DeletePlanetPage(driver, "Delete Planet");
     }
 
 

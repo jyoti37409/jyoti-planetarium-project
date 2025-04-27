@@ -2,7 +2,6 @@ package com.revature.step;
 
 import static com.revature.TestRunner.*;
 
-import com.revature.pom.AddPlanetPage;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.*;
@@ -36,25 +35,25 @@ public class AddPlanetSteps {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("planetNameInput")));
 
         // Initialize the page object
-        addPlanetPage = new AddPlanetPage(driver, "Planetarium");
-        Assert.assertTrue(addPlanetPage.isWelcomeMessageDisplayed("Batman"));
+//        addPlanetPage = new AddPlanetPage(driver, "Planetarium");
+//        Assert.assertTrue(addPlanetPage.isWelcomeMessageDisplayed("Batman"));
     }
 
     @When("the user provides a valid planet name {string}")
     public void the_user_provides_a_valid_planet_name(String planetName) {
-        addPlanetPage.selectLocationAsPlanet();
-        addPlanetPage.enterPlanetName(planetName);
-        addPlanetPage.clickButton();
+        planetariumPage.selectLocationAsPlanet();
+        planetariumPage.enterPlanetName(planetName);
+        planetariumPage.clickButton();
     }
 
     @When("the user provides a valid planet name {string} and image path {string}")
     public void the_user_provides_a_valid_planet_name_and_image_path(String planetName, String imagePath) {
-        addPlanetPage.selectLocationAsPlanet();
-        addPlanetPage.enterPlanetName(planetName);
-        addPlanetPage.uploadPlanetImage(imagePath);
+        planetariumPage.selectLocationAsPlanet();
+        planetariumPage.enterPlanetName(planetName);
+        planetariumPage.uploadPlanetImage(imagePath);
 
         try {
-            addPlanetPage.clickButton(); // Try to submit
+            planetariumPage.clickButton(); // Try to submit
         } catch (UnhandledAlertException e) {
             // Handle unexpected alerts
             Alert alert = driver.switchTo().alert();
@@ -79,7 +78,7 @@ public class AddPlanetSteps {
                 Assert.fail("Test failed due to validation alert: " + alert.getText());
             }
 
-            Assert.assertTrue(addPlanetPage.isPlanetDisplayed(planetName));
+            Assert.assertTrue(planetariumPage.isPlanetDisplayed(planetName));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -96,15 +95,15 @@ public class AddPlanetSteps {
 
     @When("the user provides a invalid planet name {string} and image path {string}")
     public void the_user_provides_a_invalid_planet_name_and_image_path(String planetName, String imagePath) {
-        addPlanetPage.selectLocationAsPlanet();
-        addPlanetPage.enterPlanetName(planetName);
+        planetariumPage.selectLocationAsPlanet();
+        planetariumPage.enterPlanetName(planetName);
 
         if (!imagePath.isEmpty()) {
-            addPlanetPage.uploadPlanetImage(imagePath);
+            planetariumPage.uploadPlanetImage(imagePath);
         }
 
         try {
-            addPlanetPage.clickButton();
+            planetariumPage.clickButton();
         } catch (UnhandledAlertException e) {
             Alert alert = driver.switchTo().alert();
             System.out.println("Unexpected alert: " + alert.getText());

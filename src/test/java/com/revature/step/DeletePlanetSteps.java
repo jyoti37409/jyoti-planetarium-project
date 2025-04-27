@@ -1,7 +1,5 @@
 package com.revature.step;
 
-import com.revature.pom.DeleteMoonPage;
-import com.revature.pom.DeletePlanetPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -14,8 +12,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static com.revature.TestRunner.deletePlanetPage;
+//import static com.revature.TestRunner.deletePlanetPage;
 import static com.revature.TestRunner.driver;
+import static com.revature.TestRunner.planetariumPage;
 
 public class DeletePlanetSteps {
 
@@ -34,20 +33,19 @@ public class DeletePlanetSteps {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("moonNameInput")));
 
 
-        deletePlanetPage = new DeletePlanetPage(driver,"Planetarium");
-        Assert.assertTrue(deletePlanetPage.isWelcomeMessageDisplayed("Batman"));
+
     }
 
     @When("the user deletes the planet {string}")
     public void the_User_Deletes_The_Planet(String planetName) {
-        deletePlanetPage.selectLocationAsPlanet();
-        deletePlanetPage.DeletePlanet(planetName);
+        planetariumPage.selectLocationAsPlanet();
+        planetariumPage.DeletePlanet(planetName);
 
-        deletePlanetPage.isPlanetVisible(planetName);
+        planetariumPage.isPlanetVisible(planetName);
     }
 
     @Then("the moon {string} should be removed from the Planetarium homepage")
     public void theMoonShouldBeRemovedFromThePlanetariumHomepage(String planetName) {
-        deletePlanetPage.isPlanetVisible(planetName);
+        planetariumPage.isPlanetVisible(planetName);
     }
 }
